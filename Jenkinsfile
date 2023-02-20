@@ -14,10 +14,10 @@ pipeline{
         }
         stage('Building image') {
             steps{
-                script {
+         
                 echo 'Building..'
                 sh 'docker image build -t $registry:${TAG} .'
-                }
+                
              }
           }
           stage('Push Image') {
