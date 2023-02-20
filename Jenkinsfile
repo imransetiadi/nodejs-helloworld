@@ -2,7 +2,6 @@ pipeline{
   environment {
     registry = "imransetiadi22/node-helloworld"
     registryCredential = 'dockerhub_credentials'
-    dockerImage = ''
   }
   agent any
     stages {
@@ -16,7 +15,8 @@ pipeline{
         stage('Building image') {
             steps{
                 script {
-                  dockerImage = docker.build registry + ":latest"
+                echo 'Building..'
+                sh 'docker image build -t $registry:${TAG} .'
                 }
              }
           }
