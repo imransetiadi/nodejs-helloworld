@@ -1,7 +1,8 @@
 pipeline{
   environment {
-    registry = "imransetiadi22/node-helloworld"
-    registryCredential = 'dockerhub_credentials'
+        TAG = "latest"
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub-credentials')
+        DOCKER_HUB_REPO = "imransetiadi22/hello-world-nodejs"
   }
   agent any
     stages {
@@ -12,28 +13,25 @@ pipeline{
                 }
             }
         }
-        stage('Building image') {
-            steps{
-         
+        stage('Build Docker Images') {
+            steps {
                 echo 'Building..'
-                sh 'docker image build -t $registry:${TAG} .'
-                
-             }
-          }
-          stage('Push Image') {
-              steps{
-                  script 
-                    {
-                        docker.withRegistry( '', registryCredential ) {
-                            dockerImage.push()
-                        }
-                   } 
-               }
+                sh 'docker image build -t $DOCKER_HUB_REPO:${TAG} .'
             }
-        stage('Deploying into k8s'){
-            steps{
-                sh 'kubectl apply -f deployment.yml'
+        }
+        stage('Push Images to Docker Hub') {
+            steps {
+                echo 'Pushing image..'
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker push $DOCKER_HUB_REPO:${TAG}'
+            }
+        }
+        stage('Deploy to Cluster Kubernetes') {
+            steps {
+                echo 'Deploying....'
+                sh 'sudo kubectl apply -f deployment.yaml'
             }
         }
     }
 }
+
