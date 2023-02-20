@@ -1,16 +1,15 @@
 pipeline{
   environment {
         TAG = "latest"
-        DOCKERHUB_CREDENTIALS=credentials('dockerhub-credentials')
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub_credentials')
         DOCKER_HUB_REPO = "imransetiadi22/hello-world-nodejs"
   }
   agent any
     stages {
         stage('Build'){
             steps{
-                script{
-                    sh 'npm install'
-                }
+                echo 'Building Nodejs..'
+                sh 'npm install'
             }
         }
         stage('Build Docker Images') {
