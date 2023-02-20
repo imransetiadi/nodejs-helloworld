@@ -1,7 +1,7 @@
 pipeline{
   environment {
-    registry = "sampath5/node-helloworld"
-    registryCredential = 'dockerhub'
+    registry = "imransetiadi22/node-helloworld"
+    registryCredential = 'dockerhub_credentials'
     dockerImage = ''
   }
   agent any
