@@ -8,7 +8,8 @@ pipeline{
   agent any
 
   tools {
-        nodejs 'node' 
+        nodejs 'node'
+        docker 'docker' 
   }
 
     stages {
