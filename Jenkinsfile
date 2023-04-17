@@ -9,7 +9,7 @@ pipeline{
 
   tools {
         nodejs 'node'
-        Docker 'Docker-latest'
+        Docker 'Docker'
   }
 
     stages {
