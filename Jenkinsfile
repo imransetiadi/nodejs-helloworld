@@ -8,6 +8,7 @@ pipeline{
   agent any
 
   tools {
+        node 'node'
         docker 'docker'
   }
 
