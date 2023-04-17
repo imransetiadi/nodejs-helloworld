@@ -6,6 +6,11 @@ pipeline{
         KUBECONFIG = credentials('kubeconfig')
   }
   agent any
+
+  tools {
+        NodeJS 'node' 
+  }
+
     stages {
         stage('Build'){
             steps{
