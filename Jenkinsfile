@@ -3,6 +3,7 @@ pipeline{
         TAG = "latest"
         DOCKERHUB_CREDENTIALS=credentials('dockerhub_credentials')
         DOCKER_HUB_REPO = "imransetiadi22/hello-world-nodejs"
+        KUBECONFIG = credentials('kubeconfig')
   }
   agent any
     stages {
