@@ -22,7 +22,7 @@ pipeline{
         stage('Build Docker Images') {
             steps {
                 echo 'Building..'
-                sh 'sudo docker image build -t $DOCKER_HUB_REPO:${TAG} .'
+                sh 'docker image build -t $DOCKER_HUB_REPO:${TAG} .'
             }
         }
         stage('Push Images to Docker Hub') {
